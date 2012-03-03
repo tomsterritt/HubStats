@@ -8,51 +8,50 @@ class HubStats extends Codondata {
 	}
 	
 	public function CountPilots($icao) { //Number of pilots
-		$query = "SELECT * FROM ".TABLE_PREFIX."pilots WHERE hub = '".$icao."'";
-		$results = DB::get_results($query);
-		return DB::num_rows($results);
+		$query = "SELECT COUNT(pilotid) as count FROM ".TABLE_PREFIX."pilots WHERE hub = '".$icao."'";
+		$results = DB::get_row($query);
+		return $results->count;
 	}
 	
 	public function CountFlights($icao) { //Number of flights total
-		$query = "SELECT * FROM ".TABLE_PREFIX."pireps WHERE arricao = '".$icao."' OR depicao = '".$icao."'";
-		$results = DB::get_results($query);
-		return DB::num_rows($results);
+		$query = "SELECT COUNT(pirepid) as count FROM ".TABLE_PREFIX."pireps WHERE arricao = '".$icao."' OR depicao = '".$icao."'";
+		$results = DB::get_row($query);
+		return $results->count;
 	}
 	
 	public function CountFlightsFrom($icao) { //Number of flights departing
-		$query = "SELECT * FROM ".TABLE_PREFIX."pireps WHERE depicao = '".$icao."'";
-		$results = DB::get_results($query);
-		return DB::num_rows($results);
+		$query = "SELECT COUNT(pirepid) as count FROM ".TABLE_PREFIX."pireps WHERE depicao = '".$icao."'";
+		$results = DB::get_row($query);
+		return $results->count;
 	}
 	
 	public function CountFlightsTo($icao) { //Number of flights arriving
-		$query = "SELECT * FROM ".TABLE_PREFIX."pireps WHERE arricao = '".$icao."'";
-		$results = DB::get_results($query);
-		return DB::num_rows($results);
+		$query = "SELECT COUNT(pirepid) FROM ".TABLE_PREFIX."pireps WHERE arricao = '".$icao."'";
+		$results = DB::get_row($query);
+		return $results->count;
 	}
 	
 	public function FlightsDetails($icao, $limit=10) { //Details of latest (10) flights
 		$query = "SELECT * FROM ".TABLE_PREFIX."pireps WHERE depicao = '".$icao."' OR arricao = '".$icao."' ORDER BY submitdate DESC LIMIT ".intval($limit);
-		$results = DB::get_results($query);
-		return $results;
+		return DB::get_results($query);
 	}
 	
 	public function CountRoutes($icao) { //Count schedules
-		$query = "SELECT * FROM ".TABLE_PREFIX."schedules WHERE depicao = '".$icao."' OR arricao = '".$icao."'";
-		$results = DB::get_results($query);
-		return DB::num_rows($results);
+		$query = "SELECT COUNT(id) as count FROM ".TABLE_PREFIX."schedules WHERE depicao = '".$icao."' OR arricao = '".$icao."'";
+		$results = DB::get_row($query);
+		return $results->count;
 	}
 	
 	public function CountRoutesFrom($icao) { //Count schedules departing
-		$query = "SELECT * FROM ".TABLE_PREFIX."schedules WHERE depicao = '".$icao."'";
-		$results = DB::get_results($query);
-		return DB::num_rows($results);
+		$query = "SELECT COUNT(id) as count FROM ".TABLE_PREFIX."schedules WHERE depicao = '".$icao."'";
+		$results = DB::get_row($query);
+		return $results->count;
 	}
 	
 	public function CountRoutesTo($icao) { //Count schedules arriving
-		$query = "SELECT * FROM ".TABLE_PREFIX."schedules WHERE arricao = '".$icao."'";
+		$query = "SELECT COUNT(id) as count FROM ".TABLE_PREFIX."schedules WHERE arricao = '".$icao."'";
 		$results = DB::get_results($query);
-		return DB::num_rows($results);
+		return $results->count;
 	}
 	
 	public function TotalMiles($icao) { //Count miles flown
