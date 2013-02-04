@@ -2,89 +2,89 @@
 
 class HubStats extends Codondata {
 	
-	public function Pilots($icao) { //Pilot details
+	public static function Pilots($icao) { //Pilot details
 		$query = "SELECT * FROM ".TABLE_PREFIX."pilots WHERE hub = '".$icao."'";
 		return DB::get_results($query);
 	}
 	
-	public function CountPilots($icao) { //Number of pilots
+	public static function CountPilots($icao) { //Number of pilots
 		$query = "SELECT COUNT(pilotid) as count FROM ".TABLE_PREFIX."pilots WHERE hub = '".$icao."'";
 		$results = DB::get_row($query);
 		return $results->count;
 	}
 	
-	public function CountFlights($icao) { //Number of flights total
+	public static function CountFlights($icao) { //Number of flights total
 		$query = "SELECT COUNT(pirepid) as count FROM ".TABLE_PREFIX."pireps WHERE arricao = '".$icao."' OR depicao = '".$icao."'";
 		$results = DB::get_row($query);
 		return $results->count;
 	}
 	
-	public function CountFlightsFrom($icao) { //Number of flights departing
+	public static function CountFlightsFrom($icao) { //Number of flights departing
 		$query = "SELECT COUNT(pirepid) as count FROM ".TABLE_PREFIX."pireps WHERE depicao = '".$icao."'";
 		$results = DB::get_row($query);
 		return $results->count;
 	}
 	
-	public function CountFlightsTo($icao) { //Number of flights arriving
+	public static function CountFlightsTo($icao) { //Number of flights arriving
 		$query = "SELECT COUNT(pirepid) FROM ".TABLE_PREFIX."pireps WHERE arricao = '".$icao."'";
 		$results = DB::get_row($query);
 		return $results->count;
 	}
 	
-	public function FlightsDetails($icao, $limit=10) { //Details of latest (10) flights
+	public static function FlightsDetails($icao, $limit=10) { //Details of latest (10) flights
 		$query = "SELECT * FROM ".TABLE_PREFIX."pireps WHERE depicao = '".$icao."' OR arricao = '".$icao."' ORDER BY submitdate DESC LIMIT ".intval($limit);
 		return DB::get_results($query);
 	}
 	
-	public function CountRoutes($icao) { //Count schedules
+	public static function CountRoutes($icao) { //Count schedules
 		$query = "SELECT COUNT(id) as count FROM ".TABLE_PREFIX."schedules WHERE depicao = '".$icao."' OR arricao = '".$icao."'";
 		$results = DB::get_row($query);
 		return $results->count;
 	}
 	
-	public function CountRoutesFrom($icao) { //Count schedules departing
+	public static function CountRoutesFrom($icao) { //Count schedules departing
 		$query = "SELECT COUNT(id) as count FROM ".TABLE_PREFIX."schedules WHERE depicao = '".$icao."'";
 		$results = DB::get_row($query);
 		return $results->count;
 	}
 	
-	public function CountRoutesTo($icao) { //Count schedules arriving
+	public static function CountRoutesTo($icao) { //Count schedules arriving
 		$query = "SELECT COUNT(id) as count FROM ".TABLE_PREFIX."schedules WHERE arricao = '".$icao."'";
 		$results = DB::get_results($query);
 		return $results->count;
 	}
 	
-	public function TotalMiles($icao) { //Count miles flown
+	public static function TotalMiles($icao) { //Count miles flown
 		$query = "SELECT SUM(distance) as miles FROM ".TABLE_PREFIX."pireps WHERE depicao = '".$icao."' OR arricao = '".$icao."'";
 		$result = DB::get_row($query);
 		return $result->miles;
 	}
 	
-	public function TotalMilesFrom($icao) { //Count miles flown departing
+	public static function TotalMilesFrom($icao) { //Count miles flown departing
 		$query = "SELECT SUM(distance) as miles FROM ".TABLE_PREFIX."pireps WHERE depicao = '".$icao."'";
 		$result = DB::get_row($query);
 		return $result->miles;
 	}
 	
-	public function TotalMilesTo($icao) { //Count miles flown arriving
+	public static function TotalMilesTo($icao) { //Count miles flown arriving
 		$query = "SELECT SUM(distance) as miles FROM ".TABLE_PREFIX."pireps WHERE arricao = '".$icao."'";
 		$result = DB::get_row($query);
 		return $result->miles;
 	}
 	
-	public function TotalHours($icao) { //Count total hours
+	public static function TotalHours($icao) { //Count total hours
 		$query = "SELECT SUM(flighttime) as hours FROM ".TABLE_PREFIX."pireps WHERE depicao = '".$icao."' OR arricao = '".$icao."'";
 		$result = DB::get_row($query);
 		return $result->hours;
 	}
 	
-	public function TotalHoursFrom($icao) { //Count total hours departing
+	public static function TotalHoursFrom($icao) { //Count total hours departing
 		$query = "SELECT SUM(flighttime) as hours FROM ".TABLE_PREFIX."pireps WHERE depicao = '".$icao."'";
 		$result = DB::get_row($query);
 		return $result->hours;
 	}
 	
-	public function TotalHoursTo($icao) { //Count total hours arriving
+	public static function TotalHoursTo($icao) { //Count total hours arriving
 		$query = "SELECT SUM(flighttime) as hours FROM ".TABLE_PREFIX."pireps WHERE arricao = '".$icao."'";
 		$result = DB::get_row($query);
 		return $result->hours;
