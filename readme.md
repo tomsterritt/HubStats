@@ -66,3 +66,7 @@ HubStats::TotalHoursFrom(ICAO)
 HubStats::TotalHoursTo(ICAO) 
 
 - Number of hours flown to this hub
+
+HubStats::TotalFuelUsed(ICAO)
+
+- Total fuel used on flights into this hub
