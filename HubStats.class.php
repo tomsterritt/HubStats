@@ -90,7 +90,7 @@ class HubStats extends Codondata {
 		return $result->hours;
 	}
 	
-	public function TotalFuelUsed($icao) { //Count total fuel used arriving
+	public static function TotalFuelUsed($icao) { //Count total fuel used arriving
 		$query = "SELECT SUM(fuelused) as fuel FROM ".TABLE_PREFIX."pireps WHERE arricao = '".$icao."'";
 		$result = DB::get_row($query);
 		return $result->fuel;
