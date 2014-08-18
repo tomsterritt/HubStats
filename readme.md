@@ -1,72 +1,13 @@
 phpVMS HubStats Class
 =====================
-To display various stats per hub:
 
-HubStats::Pilots(ICAO)
+To retrieve various cumulative stats (pilots, flights, schedules, miles flown and fuel burnt) per hub. Also works with any other airport in the database.
 
-- Returns details of pilots at this hub, for table etc
+###Installation
 
+To install, drop the ```HubStats.class.php``` in ```core/common/```. That's it!
 
-HubStats::CountPilots(ICAO)
+###Usage
 
-- Number of pilots at this hub
+For a complete list of functions, please see the code - it is fairly well commented.
 
-
-HubStats::CountFlights(ICAO) 
-
-- Number of flights completed using this hub
-
-HubStats::CountFlightsFrom(ICAO) 
-
-- Number of flights completed from this hub
-
-HubStats::CountFlightsTo(ICAO) 
-
-- Number of flights completed to this hub
-
-HubStats::FlightsDetails(ICAO) 
-
-- Details of flights using this hub, for table etc
-
-
-HubStats::CountRoutes(ICAO) 
-
-- Number of schedules using this hub
-
-HubStats::CountRoutesFrom(ICAO) 
-
-- Number of schedules from this hub
-
-HubStats::CountRoutesTo(ICAO) 
-
-- Number of schedules to this hub
-
-
-HubStats::TotalMiles(ICAO)
-
-- Number of miles flown using this hub
-
-HubStats::TotalMilesFrom(ICAO) 
-
-- Number of miles flown from this hub
-
-HubStats::TotalMilesTo(ICAO) 
-
-- Number of miles flown to this hub
-
-
-HubStats::TotalHours(ICAO) 
-
-- Number of hours flown using this hub
-
-HubStats::TotalHoursFrom(ICAO)
-
-- Number of hours flown from this hub
-
-HubStats::TotalHoursTo(ICAO) 
-
-- Number of hours flown to this hub
-
-HubStats::TotalFuelUsed(ICAO)
-
-- Total fuel used on flights into this hub
