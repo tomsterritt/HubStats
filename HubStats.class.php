@@ -233,8 +233,8 @@ class HubStats extends Codondata
 
     public static function TotalFuel($icao)
     {
-        $result = DB::get_row("SELECT SUM(fuelused) as fuel FROM ".TABLE_PREFIX."pireps WHERE arricao = '".$icao."' OR arricao = '".$icao."'");
-        return $result->fuel;
+        $result = DB::get_row("SELECT SUM(fuelused) as fuel FROM ".TABLE_PREFIX."pireps WHERE arricao = '".$icao."' OR depicao = '".$icao."'");
+        return round($result->fuel, 1);
     }
 
     /**
@@ -247,7 +247,7 @@ class HubStats extends Codondata
     public static function TotalFuelInbound($icao)
     {
         $result = DB::get_row("SELECT SUM(fuelused) as fuel FROM ".TABLE_PREFIX."pireps WHERE arricao = '".$icao."'");
-        return $result->fuel;
+        return round($result->fuel, 1);
     }
 
     /**
@@ -260,7 +260,7 @@ class HubStats extends Codondata
     public static function TotalFuelOutbound($icao)
     {
         $result = DB::get_row("SELECT SUM(fuelused) as fuel FROM ".TABLE_PREFIX."pireps WHERE depicao = '".$icao."'");
-        return $result->fuel;
+        return round($result->fuel, 1);
     }
 
 }
